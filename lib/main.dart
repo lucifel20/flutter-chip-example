@@ -25,6 +25,7 @@ class _HomeRoute extends State<HomeRoute> {
   //
   String _chipDLabel = 'Download';
   bool _isChipDPressed = false;
+
   void _chipDPressed() {
     _isChipDPressed = !_isChipDPressed;
     setState(() {
@@ -58,6 +59,14 @@ class _HomeRoute extends State<HomeRoute> {
   void _japaneseChipSelected(bool isSelected) {
     _isJapaneseSelected = isSelected;
     _displaySelected();
+  }
+
+  int _selectedIdx = 0;
+
+  void _programmingLangSelected(int idx) {
+    setState(() {
+      _selectedIdx = idx;
+    });
   }
 
   @override
@@ -114,6 +123,9 @@ class _HomeRoute extends State<HomeRoute> {
                 ), // Chip()
               ], // List<Widget>[]
             ), // Wrap()
+            SizedBox(
+              height: 30.0,
+            ), // SizedBox()
             ActionChip(
               label: Text(
                 _chipDLabel,
@@ -131,7 +143,10 @@ class _HomeRoute extends State<HomeRoute> {
                       foregroundColor: Colors.white,
                     ), // CircleAvatar()
               onPressed: _chipDPressed,
-            ),
+            ), // ActionChip()
+            SizedBox(
+              height: 30.0,
+            ), // SizedBox()
             Wrap(
               spacing: 6.0,
               runSpacing: 6.0,
@@ -153,7 +168,7 @@ class _HomeRoute extends State<HomeRoute> {
                     foregroundColor: Colors.white,
                   ), // CircleAvatar()
                   onSelected: _englishChipSelected,
-                ), // ActionChip()
+                ), // FilterChip()
                 FilterChip(
                   label: Text(
                     'French',
@@ -171,7 +186,7 @@ class _HomeRoute extends State<HomeRoute> {
                     foregroundColor: Colors.white,
                   ), // CircleAvatar()
                   onSelected: _frenchChipSelected,
-                ), // ActionChip()
+                ), // FilterChip()
                 FilterChip(
                   label: Text(
                     'Japanese',
@@ -189,10 +204,88 @@ class _HomeRoute extends State<HomeRoute> {
                     foregroundColor: Colors.white,
                   ), // CircleAvatar()
                   onSelected: _japaneseChipSelected,
-                ), // ActionChip()
+                ), // FilterChip()
               ], // List<Widget>[]
             ), // Wrap()
             Text(_text),
+            SizedBox(
+              height: 30.0,
+            ), // SizedBox()
+            Wrap(
+              spacing: 6.0,
+              runSpacing: 6.0,
+              children: <Widget>[
+                ChoiceChip(
+                  label: Text(
+                    'Kotlin',
+                    style: TextStyle(
+                      color: _selectedIdx == 0
+                          ? Colors.yellowAccent
+                          : Colors.indigo,
+                    ), // TextStyle()
+                  ), // Text()
+                  elevation: 10.0,
+                  pressElevation: 20.0,
+                  selected: _selectedIdx == 0,
+                  selectedColor: Colors.black,
+                  selectedShadowColor: Colors.indigo,
+                  avatar: CircleAvatar(
+                    child: Text('K'),
+                    backgroundColor: Colors.indigo,
+                    foregroundColor: Colors.white,
+                  ), // CircleAvatar()
+                  onSelected: (bool) {
+                    _programmingLangSelected(0);
+                  },
+                ), // ChoiceChip()
+                ChoiceChip(
+                  label: Text(
+                    'Python',
+                    style: TextStyle(
+                      color: _selectedIdx == 1
+                          ? Colors.yellowAccent
+                          : Colors.indigo,
+                    ), // TextStyle()
+                  ), // Text()
+                  elevation: 10.0,
+                  pressElevation: 20.0,
+                  selected: _selectedIdx == 1,
+                  selectedColor: Colors.black,
+                  selectedShadowColor: Colors.indigo,
+                  avatar: CircleAvatar(
+                    child: Text('P'),
+                    backgroundColor: Colors.indigo,
+                    foregroundColor: Colors.white,
+                  ), // CircleAvatar()
+                  onSelected: (bool) {
+                    _programmingLangSelected(1);
+                  },
+                ), // ChoiceChip()
+                ChoiceChip(
+                  label: Text(
+                    'Swift',
+                    style: TextStyle(
+                      color: _selectedIdx == 2
+                          ? Colors.yellowAccent
+                          : Colors.indigo,
+                    ), // TextStyle()
+                  ), // Text()
+                  elevation: 10.0,
+                  pressElevation: 20.0,
+                  selected: _selectedIdx == 2,
+                  selectedColor: Colors.black,
+                  selectedShadowColor: Colors.indigo,
+                  avatar: CircleAvatar(
+                    child: Text('S'),
+                    backgroundColor: Colors.indigo,
+                    foregroundColor: Colors.white,
+                  ), // CircleAvatar()
+                  onSelected: (bool) {
+                    _programmingLangSelected(2);
+                  },
+                ), // ChoiceChip()
+              ], // List<Widget>[]
+            ), // Wrap()
           ], // List<Widget>[]
         ), // Column()
       ), // SafeArea()
